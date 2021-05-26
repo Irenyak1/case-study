@@ -1,6 +1,6 @@
 using System;
 using CaseStudy.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; // ORM tool that coverts models into columns in the database
 
 namespace CaseStudy.Data
 {

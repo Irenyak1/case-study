@@ -20,10 +20,16 @@ namespace CaseStudy.Controllers
         }
 
         // GET: Book
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchBy, string search)
         {
             var libraryContext = _context.Books.Include(b => b.Author);
-            return View(await libraryContext.ToListAsync());
+            if(searchBy == "Title"){
+            return View(await libraryContext.Where(x => x.Title == search || search == null ).ToListAsync());
+            }
+            else
+            {
+                return View(await libraryContext.ToListAsync());
+            }
         }
 
         // GET: Book/Details/5
@@ -48,7 +54,7 @@ namespace CaseStudy.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id");
+            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name");
             return View();
         }
 
@@ -65,7 +71,7 @@ namespace CaseStudy.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
             return View(book);
         }
 
@@ -82,7 +88,7 @@ namespace CaseStudy.Controllers
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
             return View(book);
         }
 
@@ -118,7 +124,7 @@ namespace CaseStudy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id", book.AuthorId);
+            ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Name", book.AuthorId);
             return View(book);
         }
 
