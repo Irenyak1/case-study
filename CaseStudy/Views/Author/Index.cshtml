@@ -4,18 +4,19 @@
     ViewData["Title"] = "Author";
 }
 
+<div style="font-family:Arial">
 <h1>Author</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Author</a>
 </p>
-<table class="table">
+<table border="1" style="width:350px">
     <thead>
         <tr>
-            <th>
+           <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -33,3 +34,5 @@
 }
     </tbody>
 </table>
+</div>
+
